@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "3fcb0cb7-3d1b-4e91-bb61-2bc20d5a4129",
+		"name": "MQ-Connection-POC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Produce Message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"HELLO PRUTHVI\""
+				},
+				"url": "http://localhost:9000/mq/send-message"
+			},
+			"response": [
+				{
+					"name": "Produce Message",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"HELLO PRUTHVI\""
+						},
+						"url": "http://localhost:9000/mq/send-message"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "content-length",
+							"value": "248"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errorCode\": \"200\",\n    \"errorDescription\": \"SUCCESS\",\n    \"response\": \"Message is produce successfully. Please refer '8f966e69-a809-4be3-bc95-4149893e9c9f' this correlation id to track the request message.\",\n    \"mqResponseReceived\": \"Processed: \\\"HELLO PRUTHVI\\\"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Consume Response Message",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "correlation_id",
+						"value": "58287560-eea2-42cd-8c9b-2c6b0a541272",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\"HELLO PRUTHVI\""
+				},
+				"url": "http://localhost:9000/mq/receive-message"
+			},
+			"response": [
+				{
+					"name": "Produce Message Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "correlation_id",
+								"value": "58287560-eea2-42cd-8c9b-2c6b0a541272",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"HELLO PRUTHVI\""
+						},
+						"url": "http://localhost:9000/mq/receive-message"
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "content-length",
+							"value": "185"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errorCode\": \"500\",\n    \"errorDescription\": \"Something went wrong during the consume the message from amqp. For more details please check the logs.\",\n    \"response\": null,\n    \"mqResponseReceived\": null\n}"
+				}
+			]
+		}
+	]
+}
